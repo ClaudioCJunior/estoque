@@ -1,6 +1,70 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import Card from '@/Components/Card.vue';
+import StatCard from '@/Components/StatCard.vue';
+
+const cards1 = [
+    {
+        bgClass: 'bg-primary',
+        iconClass: 'fas fa-shopping-cart',
+        value: 1600,
+        label: 'Vendas Ultimo Mês',
+        percentage: 'Valor Total: R$ 10.000,00',
+    },
+    {
+        bgClass: 'bg-dark',
+        iconClass: 'fas fa-money-bill-wave',
+        value: 1200,
+        label: 'Descontos Aplicados',
+        percentage: 'Percentual: 10%',
+    },
+];
+
+const cards2 = [
+{
+        bgClass: 'bg-dark',
+        iconClass: 'fas fa-chart-line',
+        value: 750,
+        label: 'Investimentos Ult. Mês',
+        percentage: '+25%',
+    },
+    {
+        bgClass: 'bg-dark',
+        iconClass: 'fas fa-users',
+        value: 300,
+        label: 'Clientes',
+        percentage: '+10%',
+    },
+];
+
+const statistics = [
+    {
+        bgClass: 'bg-primary',
+        iconClass: 'fas fa-file-alt text-white text-xxs opacity-10',
+        label: 'Tot. Vendas',
+        value: 10,
+    },
+    {
+        bgClass: 'bg-success',
+        iconClass: 'fas fa-user-plus text-white text-xxs opacity-10',
+        label: 'New Users',
+        value: 1200,
+    },
+    {
+        bgClass: 'bg-warning',
+        iconClass: 'fas fa-chart-line text-white text-xxs opacity-10',
+        label: 'Sales',
+        value: 750,
+    },
+    {
+        bgClass: 'bg-danger',
+        iconClass: 'fas fa-exclamation-triangle text-white text-xxs opacity-10',
+        label: 'Issues',
+        value: 300,
+    },
+];
+
 </script>
 
 <template>
@@ -10,194 +74,244 @@ import { Head } from '@inertiajs/vue3';
         <div class="row">
         <div class="col-lg-6 col-12">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-12">
-              <div class="card">
-                <span class="mask bg-primary opacity-10 border-radius-lg"></span>
-                <div class="card-body p-3 position-relative">
-                  <div class="row">
-                    <div class="col-8 text-start">
-                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                        <i class="ni ni-circle-08 text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                      <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                        1600
-                      </h5>
-                      <span class="text-white text-sm">Users Active</span>
-                    </div>
-                    <div class="col-4">
-                      <div class="dropdown text-end mb-6">
-                        <a href="javascript:;" class="cursor-pointer" id="dropdownUsers1" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-ellipsis-h text-white"></i>
-                        </a>
-                        <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers1">
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                        </ul>
-                      </div>
-                      <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+55%</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-4 mt-md-0">
-              <div class="card">
-                <span class="mask bg-dark opacity-10 border-radius-lg"></span>
-                <div class="card-body p-3 position-relative">
-                  <div class="row">
-                    <div class="col-8 text-start">
-                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                        <i class="ni ni-active-40 text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                      <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                        357
-                      </h5>
-                      <span class="text-white text-sm">Click Events</span>
-                    </div>
-                    <div class="col-4">
-                      <div class="dropstart text-end mb-6">
-                        <a href="javascript:;" class="cursor-pointer" id="dropdownUsers2" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-ellipsis-h text-white"></i>
-                        </a>
-                        <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers2">
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                        </ul>
-                      </div>
-                      <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+124%</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Card
+                v-for="(card, index) in cards1"
+                :key="index"
+                :bg-class="card.bgClass"
+                :icon-class="card.iconClass"
+                :value="card.value"
+                :label="card.label"
+                :percentage="card.percentage"
+
+            />
           </div>
           <div class="row mt-4">
-            <div class="col-lg-6 col-md-6 col-12">
-              <div class="card">
-                <span class="mask bg-dark opacity-10 border-radius-lg"></span>
-                <div class="card-body p-3 position-relative">
-                  <div class="row">
-                    <div class="col-8 text-start">
-                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                        <i class="ni ni-cart text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                      <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                        2300
-                      </h5>
-                      <span class="text-white text-sm">Purchases</span>
-                    </div>
-                    <div class="col-4">
-                      <div class="dropdown text-end mb-6">
-                        <a href="javascript:;" class="cursor-pointer" id="dropdownUsers3" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-ellipsis-h text-white"></i>
-                        </a>
-                        <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers3">
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                        </ul>
-                      </div>
-                      <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+15%</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-12 mt-4 mt-md-0">
-              <div class="card">
-                <span class="mask bg-dark opacity-10 border-radius-lg"></span>
-                <div class="card-body p-3 position-relative">
-                  <div class="row">
-                    <div class="col-8 text-start">
-                      <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                        <i class="ni ni-like-2 text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
-                      </div>
-                      <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                        940
-                      </h5>
-                      <span class="text-white text-sm">Likes</span>
-                    </div>
-                    <div class="col-4">
-                      <div class="dropstart text-end mb-6">
-                        <a href="javascript:;" class="cursor-pointer" id="dropdownUsers4" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-ellipsis-h text-white"></i>
-                        </a>
-                        <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers4">
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                          <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                        </ul>
-                      </div>
-                      <p class="text-white text-sm text-end font-weight-bolder mt-auto mb-0">+90%</p>
-                    </div>
-                  </div>
+            <Card
+                v-for="(card, index) in cards2"
+                :key="index"
+                :bg-class="card.bgClass"
+                :icon-class="card.iconClass"
+                :value="card.value"
+                :label="card.label"
+                :percentage="card.percentage"
+                />
+            
+          </div>
+          <div class="row mt-4">
+            <div class="card z-index-2">
+            <div class="card-body p-2">
+              <h6 class="ms-2 mt-4 mb-0"> Active Users </h6>
+              <p class="text-sm ms-2"> (<span class="font-weight-bolder">+23%</span>) than last week </p>
+              <div class="container border-radius-lg">
+                <div class="row">
+                    <StatCard
+                        v-for="(stat, index) in statistics"
+                        :key="index"
+                        :bg-class="stat.bgClass"
+                        :icon-class="stat.iconClass"
+                        :label="stat.label"
+                        :value="stat.value"
+                    />
                 </div>
               </div>
             </div>
           </div>
+          </div>
         </div>
-        <div class="col-lg-6 col-12 mt-4 mt-lg-0">
-          <div class="card shadow h-100">
-            <div class="card-header pb-0 p-3">
-              <h6 class="mb-0">Reviews</h6>
-            </div>
-            <div class="card-body pb-0 p-3">
-              <ul class="list-group">
-                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-0">
-                  <div class="w-100">
-                    <div class="d-flex mb-2">
-                      <span class="me-2 text-sm font-weight-bold text-dark">Positive Reviews</span>
-                      <span class="ms-auto text-sm font-weight-bold">80%</span>
-                    </div>
-                    <div>
-                      <div class="progress progress-md">
-                        <div class="progress-bar bg-primary w-80" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                  <div class="w-100">
-                    <div class="d-flex mb-2">
-                      <span class="me-2 text-sm font-weight-bold text-dark">Neutral Reviews</span>
-                      <span class="ms-auto text-sm font-weight-bold">17%</span>
-                    </div>
-                    <div>
-                      <div class="progress progress-md">
-                        <div class="progress-bar bg-primary w-10" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                  <div class="w-100">
-                    <div class="d-flex mb-2">
-                      <span class="me-2 text-sm font-weight-bold text-dark">Negative Reviews</span>
-                      <span class="ms-auto text-sm font-weight-bold">3%</span>
-                    </div>
-                    <div>
-                      <div class="progress progress-md">
-                        <div class="progress-bar bg-primary w-5" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer pt-0 p-3 d-flex align-items-center">
-              <div class="w-60">
-                <p class="text-sm">
-                  More than <b>1,500,000</b> developers used Creative Tim's products and over <b>700,000</b> projects were created.
-                </p>
+        <div class="col-lg-6 col-md-6 mb-md-0 mb-4">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="row">
+                <div class="col-lg-6 col-7">
+                  <h6>Ultimas Vendas</h6>
+                  <p class="text-sm mb-0">
+                    <i class="fa fa-check text-info" aria-hidden="true"></i>
+                    Últimas do <span class="font-weight-bold ms-1">Mês</span>   
+                  </p>
+                </div>
               </div>
-              <div class="w-40 text-end">
-                <a class="btn btn-dark mb-0 text-end" href="javascript:;">View all reviews</a>
+            </div>
+            <div class="card-body px-0">
+              <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cliente</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Valor</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pagamento</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Fulano 1</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> $14,000 </span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> Cartão de Crédito</span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> 19/01/2025</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Fulano 2</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> $16,000 </span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> Pix</span>
+                      </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-xs font-weight-bold"> 19/01/2025</span>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Fulano 3</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> $12,000 </span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> Dinheiro</span>
+                      </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-xs font-weight-bold"> 19/01/2025</span>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Fulano 4</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> $10,000 </span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> Cartão de Débito</span>
+                      </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-xs font-weight-bold"> 19/01/2025</span>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Fulano 5</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> $18,000 </span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> Cartão de Crédito</span>
+                      </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-xs font-weight-bold"> 19/01/2025</span>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Fulano 5</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> $18,000 </span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> Cartão de Crédito</span>
+                      </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-xs font-weight-bold"> 19/01/2025</span>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Fulano 5</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> $18,000 </span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> Cartão de Crédito</span>
+                      </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-xs font-weight-bold"> 19/01/2025</span>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Fulano 5</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> $18,000 </span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> Cartão de Crédito</span>
+                      </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-xs font-weight-bold"> 19/01/2025</span>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Fulano 5</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> $18,000 </span>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="text-xs font-weight-bold"> Cartão de Crédito</span>
+                      </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-xs font-weight-bold"> 19/01/2025</span>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
+       
       </div>
     </AuthenticatedLayout>
 </template>

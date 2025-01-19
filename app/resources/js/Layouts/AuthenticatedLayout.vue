@@ -10,16 +10,22 @@ function toggleSidebar() {
 }</script>
 
 <template>
-    <div :class="['g-sidenav-show bg-gray-100', { 'g-sidenav-pinned': isSidebarOpen }]">
+    <div :class="['g-sidenav-show', { 'g-sidenav-pinned': isSidebarOpen }]">
         <Sidebar :is-sidebar-open="isSidebarOpen"/>
 
 
-        <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps ps--active-y">
+        <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg overflow-auto">
             <Navbar @toggle-sidebar="toggleSidebar"/>
 
-            <div class="container-fluid py-4">
+            <div class="container-fluid py-6">
                 <slot />
             </div>
         </main>
     </div>
 </template>
+
+<style scoped>
+.main-content {
+    overflow-y: auto;
+}
+</style>
