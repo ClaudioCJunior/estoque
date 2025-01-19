@@ -13,6 +13,6 @@
 `docker-compose exec app npm install && npm run build`
 
 #### Comando para rodar aplicação no modo desenvolvedor
-docker exec -it laravel_app npm run dev
+`docker exec -it laravel_app npm run dev`
 
 
