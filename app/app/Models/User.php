@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function establishments()
+    {
+        return $this->belongsToMany(Establishment::class, 'establishment_user');
+    }
 }

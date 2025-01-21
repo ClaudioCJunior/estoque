@@ -1,14 +1,10 @@
+<template>
+    <label :for="htmlFor" class="form-control-label">{{ value }}</label>
+</template>
+
 <script setup>
-defineProps({
-    value: {
-        type: String,
-    },
+const props = defineProps({
+    value: String,
+    htmlFor: String,
 });
 </script>
-
-<template>
-    <label class="block text-sm font-medium text-gray-700">
-        <span v-if="value">{{ value }}</span>
-        <span v-else><slot /></span>
-    </label>
-</template>

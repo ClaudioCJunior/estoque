@@ -1,20 +1,9 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-
-defineProps({
-    canResetPassword: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
+import Checkbox from '@/Components/Checkbox.vue';
+import { useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     email: '',
@@ -39,9 +28,9 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel :htmlFor="'email'" value="Email" />
 
-                <TextInput
+                <input
                     id="email"
                     type="email"
                     class="mt-1 block w-full"
@@ -55,9 +44,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel :htmlFor="'password'" value="Password" />
 
-                <TextInput
+                <input
                     id="password"
                     type="password"
                     class="mt-1 block w-full"
@@ -69,26 +58,23 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="mt-4 block">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
+            <div class="block mt-4">
+                <label for="remember" class="inline-flex items-center">
+                    <Checkbox id="remember" v-model="form.remember" />
+                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
+            <div class="flex items-center justify-end mt-4">
                 <Link
-                    v-if="canResetPassword"
-                    :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    href="{{ route('password.request') }}"
+                    class="underline text-sm text-gray-600 hover:text-gray-900"
                 >
                     Forgot your password?
                 </Link>
 
                 <PrimaryButton
-                    class="ms-4"
+                    class="ml-4"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >

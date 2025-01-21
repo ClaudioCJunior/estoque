@@ -45,8 +45,8 @@ const navAccountItems = [
         iconClass: 'fas fa-user',
     },
     {
-        href: 'clientes',
-        text: 'Estabelecimento',
+        href: 'establishments.index',
+        text: 'Estabelecimentos',
         iconClass: 'fas fa-store',
     },
     {

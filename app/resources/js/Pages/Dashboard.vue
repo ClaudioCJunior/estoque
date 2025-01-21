@@ -3,6 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import Card from '@/Components/Card.vue';
 import StatCard from '@/Components/StatCard.vue';
+import PageName from '@/Components/PageName.vue';
 
 const cards1 = [
     {
@@ -41,26 +42,26 @@ const cards2 = [
 const statistics = [
     {
         bgClass: 'bg-primary',
-        iconClass: 'fas fa-file-alt text-white text-xxs opacity-10',
+        iconClass: 'fas fa-cart-arrow-down text-white text-xxs opacity-10',
         label: 'Tot. Vendas',
         value: 10,
     },
     {
         bgClass: 'bg-success',
-        iconClass: 'fas fa-user-plus text-white text-xxs opacity-10',
-        label: 'New Users',
+        iconClass: 'fas fa-chart-line text-white text-xxs opacity-10',
+        label: 'Investimentos',
         value: 1200,
     },
     {
         bgClass: 'bg-warning',
-        iconClass: 'fas fa-chart-line text-white text-xxs opacity-10',
-        label: 'Sales',
+        iconClass: 'fas fa-money-bill-wave text-white text-xxs opacity-10',
+        label: 'Descontos',
         value: 750,
     },
     {
         bgClass: 'bg-danger',
         iconClass: 'fas fa-exclamation-triangle text-white text-xxs opacity-10',
-        label: 'Issues',
+        label: 'Produtos',
         value: 300,
     },
 ];
@@ -71,7 +72,9 @@ const statistics = [
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
-        <div class="row">
+      <div class="container">
+        <PageName name="Dashboard"/>
+        <div class="row mt-2">
         <div class="col-lg-6 col-12">
           <div class="row">
             <Card
@@ -97,11 +100,10 @@ const statistics = [
                 />
             
           </div>
-          <div class="row mt-4">
-            <div class="card z-index-2">
+          <div class="row mt-4 p-3">
+            <div class="card">
             <div class="card-body p-2">
-              <h6 class="ms-2 mt-4 mb-0"> Active Users </h6>
-              <p class="text-sm ms-2"> (<span class="font-weight-bolder">+23%</span>) than last week </p>
+              <h6 class="ms-2 mt-4 mb-0"> Fluxo de Caixa Aberto </h6>
               <div class="container border-radius-lg">
                 <div class="row">
                     <StatCard
@@ -312,6 +314,7 @@ const statistics = [
           </div>
         </div>
        
+      </div>
       </div>
     </AuthenticatedLayout>
 </template>

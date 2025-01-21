@@ -1,24 +1,36 @@
 <script setup>
+import { ref, watch, onMounted } from 'vue';
+import { useForm } from '@inertiajs/vue3';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
-import { Link, useForm, usePage } from '@inertiajs/vue3';
 
-defineProps({
-    mustVerifyEmail: {
-        type: Boolean,
-    },
-    status: {
-        type: String,
-    },
-});
-
-const user = usePage().props.auth.user;
+const user = ref(null);
+const mustVerifyEmail = ref(false);
+const status = ref(null);
 
 const form = useForm({
-    name: user.name,
-    email: user.email,
+    name: '',
+    email: '',
+});
+
+onMounted(() => {
+    user.value = $page.props.auth.user;
+    form.name = user.value.name;
+    form.email = user.value.email;
+    mustVerifyEmail.value = $page.props.auth.mustVerifyEmail;
+});
+
+const updateProfileInformation = () => {
+    form.put(route('user-profile-information.update'), {
+        errorBag: 'updateProfileInformation',
+        preserveScroll: true,
+        onSuccess: () => form.reset(),
+    });
+};
+
+watch(() => $page.props.status, value => {
+    status.value = value;
 });
 </script>
 
@@ -34,16 +46,12 @@ const form = useForm({
             </p>
         </header>
 
-        <form
-            @submit.prevent="form.patch(route('profile.update'))"
-            class="mt-6 space-y-6"
-        >
+        <form @submit.prevent="updateProfileInformation" class="mt-6 space-y-6">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel :htmlFor="'name'" value="Name" />
 
-                <TextInput
+                <input
                     id="name"
-                    type="text"
                     class="mt-1 block w-full"
                     v-model="form.name"
                     required
@@ -55,9 +63,9 @@ const form = useForm({
             </div>
 
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel :htmlFor="'email'" value="Email" />
 
-                <TextInput
+                <input
                     id="email"
                     type="email"
                     class="mt-1 block w-full"
@@ -99,10 +107,7 @@ const form = useForm({
                     leave-active-class="transition ease-in-out"
                     leave-to-class="opacity-0"
                 >
-                    <p
-                        v-if="form.recentlySuccessful"
-                        class="text-sm text-gray-600"
-                    >
+                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">
                         Saved.
                     </p>
                 </Transition>

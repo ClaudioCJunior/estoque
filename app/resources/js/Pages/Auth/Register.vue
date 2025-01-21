@@ -3,7 +3,6 @@ import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
@@ -26,9 +25,9 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="name" value="Name" />
+                <InputLabel :htmlFor="'name'" value="Name" />
 
-                <TextInput
+                <input
                     id="name"
                     type="text"
                     class="mt-1 block w-full"
@@ -42,9 +41,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+                <InputLabel :htmlFor="'email'" value="Email" />
 
-                <TextInput
+                <input
                     id="email"
                     type="email"
                     class="mt-1 block w-full"
@@ -57,9 +56,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+                <InputLabel :htmlFor="'password'" value="Password" />
 
-                <TextInput
+                <input
                     id="password"
                     type="password"
                     class="mt-1 block w-full"
@@ -72,12 +71,9 @@ const submit = () => {
             </div>
 
             <div class="mt-4">
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
+                <InputLabel :htmlFor="'password_confirmation'" value="Confirm Password" />
 
-                <TextInput
+                <input
                     id="password_confirmation"
                     type="password"
                     class="mt-1 block w-full"
@@ -86,10 +82,7 @@ const submit = () => {
                     autocomplete="new-password"
                 />
 
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.password_confirmation"
-                />
+                <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
 
             <div class="mt-4 flex items-center justify-end">

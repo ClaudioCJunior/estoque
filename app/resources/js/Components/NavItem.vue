@@ -20,7 +20,13 @@ const props = defineProps({
 });
 
 const page = usePage();
-const isActive = computed(() => page.url.includes(props.href));
+const isActive = computed(() => {
+    const url = page.url.split('?')[0];
+    const href = props.href.split('.')[0];
+console.log(url, href);
+
+    return url.includes(href);
+});
 </script>
 
 <style scoped>
