@@ -4,14 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEstablishmentUserTable extends Migration
+class CreateEstablishmentUsersTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('establishment_user', function (Blueprint $table) {
+        Schema::create('establishment_users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('establishment_id')->constrained('establishments')->onDelete('cascade');
@@ -24,6 +24,6 @@ class CreateEstablishmentUserTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('establishment_user');
+        Schema::dropIfExists('establishment_users');
     }
 }

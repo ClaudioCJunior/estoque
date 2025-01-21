@@ -18,10 +18,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-if="establishments.length === 0">
-                                        <td colspan="3" class="text-center">No establishments found.</td>
+                                    <tr v-if="establishments.data.length === 0">
+                                        <td colspan="3" class="text-center">
+                                            <p class="text-xs font-weight-bold mb-0">Nenhum estabelecimento encontrado</p>
+                                            </td>
                                     </tr>
-                                    <tr v-else v-for="establishment in establishments" :key="establishment.id">
+                                    <tr v-else v-for="establishment in establishments.data" :key="establishment.id">
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
@@ -34,10 +36,10 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             <div class="d-flex justify-content-center gap-2">
-                                                <Link :href="route('establishments.edit', establishment.id)" class="btn btn-outline-warning btn-sm" data-toggle="tooltip" data-original-title="Editar">
+                                                <Link :href="route('establishments.edit', establishment.id)" class="btn bg-gradient-warning btn-sm" data-toggle="tooltip" data-original-title="Editar">
                                                     Alterar
                                                 </Link>
-                                                <Link :href="route('establishments.show', establishment.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-original-title="Visualizar">
+                                                <Link :href="route('establishments.show', establishment.id)" class="btn bg-gradient-info btn-sm" data-toggle="tooltip" data-original-title="View establishment">
                                                     View
                                                 </Link>
                                             </div>
@@ -45,6 +47,9 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="mt-4">
+                            <Pagination :links="establishments.links" />
                         </div>
                     </div>
                 </div>
@@ -55,13 +60,11 @@
 
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import PageName from '@/Components/PageName.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { ref } from 'vue';
+import Pagination from '@/Components/Pagination.vue'; // Certifique-se de ter um componente de paginação
+import PageName from '@/Components/PageName.vue';
 
 const props = defineProps({
-    establishments: Array,
+    establishments: Object,
 });
-
-//const csrf = ref(document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 </script>

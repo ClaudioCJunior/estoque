@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Establishment;
 use App\Services\EstablishmentService;
 use App\Http\Requests\EstablishmentRequest;
+use App\Interfaces\Services\IEstablishmentService;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class EstablishmentController extends Controller
 {
     protected $establishmentService;
 
-    public function __construct(EstablishmentService $establishmentService)
+    public function __construct(IEstablishmentService $establishmentService)
     {
         $this->establishmentService = $establishmentService;
     }
@@ -21,7 +23,9 @@ class EstablishmentController extends Controller
      */
     public function index()
     {
-        $establishments = $this->establishmentService->getAllEstablishments();
+        $user = Auth::user();
+        $establishments = $this->establishmentService->getAllByUserPaginated(10, $user->id);
+
         return Inertia::render('Establishments/Index', ['establishments' => $establishments]);
     }
 
@@ -38,7 +42,7 @@ class EstablishmentController extends Controller
      */
     public function store(EstablishmentRequest $request)
     {
-        $this->establishmentService->createEstablishment($request->toEstablishmentData());
+        $this->establishmentService->create($request->toEstablishmentData());
 
         return redirect()->route('establishments.index')->with('success', 'Establishment created successfully.');
     }
@@ -64,7 +68,9 @@ class EstablishmentController extends Controller
      */
     public function update(EstablishmentRequest $request, Establishment $establishment)
     {
-        $this->establishmentService->updateEstablishment($request->toEstablishmentData(), $establishment);
+        $user = Auth::user();
+
+        $this->establishmentService->update($request->toEstablishmentData(), $establishment->id, $user->id);
 
         return redirect()->route('establishments.index')->with('success', 'Establishment updated successfully.');
     }
@@ -74,7 +80,9 @@ class EstablishmentController extends Controller
      */
     public function destroy(Establishment $establishment)
     {
-        $this->establishmentService->deleteEstablishment($establishment);
+        $user = Auth::user();
+
+        $this->establishmentService->delete($establishment->id, $user->id);
 
         return redirect()->route('establishments.index')->with('success', 'Establishment deleted successfully.');
     }
