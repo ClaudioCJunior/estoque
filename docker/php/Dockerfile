@@ -15,11 +15,26 @@ RUN apt-get update && apt-get install -y \
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Configurar diretório de trabalho
+# Adicionar a variável de ambiente para o Composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Configurar o diretório de trabalho no container
 WORKDIR /var/www/html
+
+# Copiar todos os arquivos do projeto para o container
+COPY ../../app/composer.json /var/www/html/composer.json
+
+# Copiar todos os arquivos do projeto para o container
+COPY ../../app/package.json /var/www/html/package.json
 
 # Instalar dependências do Laravel
 RUN composer global require laravel/installer
+
+RUN composer install --no-dev --optimize-autoloader --no-scripts
+
+# Instalar dependências do NPM
+RUN npm install
+
 
 # # Copiar o script de inicialização para dentro do container
 # COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
