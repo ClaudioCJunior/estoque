@@ -4,13 +4,16 @@
 
 ```docker-compose down && docker-compose up --build```
 
-#### Após isso rodar o comando para instalar o npm e o build do node
+#### Copiar o .env local para dentro do app
 
-`docker exec -it laravel_app npm install && npm run build`
 
-#### OU
+#### Após isso rodar o comando para o build do node
 
-`docker-compose exec app npm install && npm run build`
+`docker exec -it laravel_app  npm run build`
+
+#### Rodar o comando de migrate
+
+`λ docker exec -it laravel_app php artisan migrate`
 
 #### Comando para rodar aplicação no modo desenvolvedor
 `docker exec -it laravel_app npm run dev`
