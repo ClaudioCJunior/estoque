@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthApiController;
 use App\Http\Controllers\EstablishmentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -23,12 +24,16 @@ Route::get('/clientes', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('clientes');
 
-Route::resource('establishments', EstablishmentController::class)->middleware(['auth', 'verified']);
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('establishments', EstablishmentController::class);
+
+    Route::get('/auth', [AuthApiController::class, 'getUser']);
 });
+
+
 
 require __DIR__.'/auth.php';

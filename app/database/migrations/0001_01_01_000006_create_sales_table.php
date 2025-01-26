@@ -17,6 +17,7 @@ class CreateSalesTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('client_id')->constrained('establishment_clients');
             $table->foreignId('discount_id')->nullable()->constrained('discounts'); // Adiciona a chave estrangeira para discounts
+            $table->foreignId('cash_register_id')->nullable()->constrained('cash_registers')->onDelete('set null');
             $table->decimal('total', 10, 2);
             $table->enum('payment_method', ['cartão', 'pix', 'dinheiro']);
             $table->enum('payment_status', ['aprovado', 'falha', 'pendente'])->default('pendente'); // Define pendente como valor padrão

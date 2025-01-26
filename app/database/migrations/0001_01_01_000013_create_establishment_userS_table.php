@@ -15,6 +15,7 @@ class CreateEstablishmentUsersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('establishment_id')->constrained('establishments')->onDelete('cascade');
+            $table->boolean('selected')->default(false); 
             $table->timestamps();
         });
     }
